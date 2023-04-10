@@ -1,24 +1,41 @@
 <?php
+php
 
-class Connection
-{
-    private $localhost = "localhost";
-    private $user = "root";
-    private $pass = "";
-    private $dbname = "CodesOfAsher";
+/**
+ * Connection to the database
+ * This class extends to others, being mandatory to pass the connection variables to each instance
+ * @param string host
+ * @param string database user
+ * @param string database password 
+ * @param string database
+ */
+
+class Connection{
+    private $localhost;
+    private $user ;
+    private $pass ;
+    private $dbname;
+
     protected $conn;
 
-    public function __construct()
+    public function __construct($user, $host, $pass,$dbname)
     {
-        try {
-            $this->conn = new PDO("mysql:localhost=$this->localhost;dbname=" . $this->dbname, $this->user, $this->pass);
-        } catch (PDOException $err) {
-            echo "Database error in conecction" . $err->getMessage();
+        $this->user = $user;
+        $this->localhost = $host;
+        $this->pass = $pass;
+        $this->dbname = $dbname;
+
+        try{
+
+            $this->conn = new PDO("mysql:localhost=$this->localhost;dbname=$this->dbname",$this->user, $this->pass);
+
+        } catch(PDOException $e){
+            
+            echo "Error connection: " . $e->getMessage();
             exit();
+        
         }
-
     }
-
 
 }
 
@@ -26,7 +43,6 @@ class Login extends Connection
 {
     private $emailUser;
     private $passUser;
-
     private $nameUser;
 
 
