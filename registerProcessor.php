@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['userEmail'];
     $password = $_POST["userPass"];
 
-    $register = new Register();
+    $register = new Register("root", "localhost", "", "dbname");
     $register->setEmail($email);
     $register->setName($name);
     $register->setPass($password);

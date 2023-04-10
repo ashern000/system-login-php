@@ -7,18 +7,18 @@ if (isset($_POST['submit'])) {
     $email = $_POST['userEmail'];
     $password = $_POST['userPass'];
 
-    $login = new Login();
+    $login = new Login("root", "localhost", "", "dbname");
 
     $login->setEmail($email);
     $login->setPass($password);
 
-    if($login->read($login->getEmail(), $login->getPass()) == false){
+    if ($login->read($login->getEmail(), $login->getPass()) == false) {
         echo "Usuário error ";
     } else {
         echo "<script>alert('Usuário Logado');document.location='loginD.php'</script>";
         $_SESSION["user"] = $_POST['userEmail'];
     }
-    
+
 
 }
 ?>
